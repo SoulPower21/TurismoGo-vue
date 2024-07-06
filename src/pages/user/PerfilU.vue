@@ -62,26 +62,38 @@
 </template>
 
 <script>
-import { ref } from 'vue'
 
 export default {
-  setup () {
-    const user = ref({
-      nombre: 'Juan',
-      apellidos: 'Pérez',
-      dni: '12345678',
-      correo: 'juan.perez@example.com',
-      contrasena: '********'
-    })
-
-    const editProfile = () => {
-      // Implementar lógica de edición de perfil aquí
-      console.log('Editar perfil')
-    }
-
+  data() {
     return {
-      user,
-      editProfile
+      user: {
+        nombre:'',
+        apellidos:'',
+        dni:12345678,
+        correo:'',
+        contrasena:'',
+      }
+    };
+
+
+  },
+  created() {
+    this.loadUserData();
+  },
+  methods:{
+   loadUserData() {
+      const u = JSON.parse(localStorage.getItem('userData'));
+      if (u) {
+        this.user.nombre = u.nombre;
+        this.user.apellidos = u.apellidos;
+        this.user.dni = "12345678";
+        this.user.correo=u.correoElectronico;
+        this.user.contrasena = "******";
+
+        console.log("Nombre: ",u);
+      } else {
+        console.error('No se encontraron datos de usuario en localStorage');
+      }
     }
   }
 }

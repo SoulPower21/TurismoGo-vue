@@ -169,8 +169,8 @@ export default {
             <q-avatar size="56px" class="q-mb-sm">
               <img src="https://cdn.quasar.dev/img/boy-avatar.png">
             </q-avatar>
-            <div class="text-weight-bold">Razvan Stoenescu</div>
-            <div>@rstoenescu</div>
+                <div class="text-weight-bold">{{ user.name }}</div>
+                <div>{{ user.email }}</div>
           </div>
         </q-img>
       </q-drawer>
@@ -186,12 +186,34 @@ export default {
 import { ref } from 'vue'
 
 export default {
+  data() {
+    return {
+      user: {
+        name: '',
+        email: ''
+      }
+    };
+  },
+  created() {
+    this.loadUserData();
+  },
   methods: {
     regresarE(){
       this.$router.push("/principalU")
     },
     navigateTo(page) {
       this.$router.push(`/${page}`)
+    }
+    ,
+    loadUserData() {
+      const u = JSON.parse(localStorage.getItem('userData'));
+      if (u) {
+        this.user.name = u.nombre;
+        this.user.email=u.correoElectronico;
+        console.log("Nombre: ",u);
+      } else {
+        console.error('No se encontraron datos de usuario en localStorage');
+      }
     }
   },
   setup () {

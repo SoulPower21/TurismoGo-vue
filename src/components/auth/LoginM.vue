@@ -69,6 +69,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   data() {
     return {
@@ -85,12 +86,50 @@ export default {
       console.log("Formulario enviado", this.formData);
       // Aquí podrías agregar la lógica para enviar los datos a tu backend
       if (this.userType === "user") {
-        this.$router.push("principalU");
+        let tip = 2;
+        this.loginU(tip,"principalU");
       } else if (this.userType === "company") {
-        this.$router.push("principalE");
+        this.loginE("principalE")
       } else if (this.userType === "adm") {
-        this.$router.push("principalA");
+        let tip = 1;
+        this.loginU(tip,"principalA");
       }
+    },
+    loginU (tipo,nombre){
+      let URL = `http://localhost:5259/api/Usuario/Login?correo=${this.formData.email}&contraseña=${this.formData.password}&tipoUsuario=${tipo}`;
+      axios
+        .post(URL, this.user)
+        .then((response) => {
+          this.$q.notify({
+            message: "Bienvenido....",
+            color: "positive",
+            position: "bottom",
+            timeout: 5000,
+          });
+          localStorage.setItem("userData", JSON.stringify(response.data));
+          this.$router.push(nombre);
+        })
+        .catch((error) => {
+          console.log(JSON.stringify(error));
+        });
+    },
+        loginE (nombre){
+      let URL = `http://localhost:5259/api/EmpresaTurismo/Login?correo=${this.formData.email}&contraseña=${this.formData.password}`;
+      axios
+        .post(URL, this.user)
+        .then((response) => {
+          this.$q.notify({
+            message: "Bienvenido....",
+            color: "positive",
+            position: "bottom",
+            timeout: 5000,
+          });
+          localStorage.setItem("userData", JSON.stringify(response.data));
+          this.$router.push(nombre);
+        })
+        .catch((error) => {
+          console.log(JSON.stringify(error));
+        });
     },
     goToRegister() {
       // Lógica para enviar el formulario de login

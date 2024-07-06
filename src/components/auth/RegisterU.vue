@@ -58,7 +58,7 @@
             />
 
             <div class="button-group">
-              <q-btn type="submit" color="primary" label="Registrarse" class="submit-btn"  @click="navigateTo('/')"/>
+              <q-btn type="submit" color="primary" label="Registrarse" class="submit-btn"  @click="submitForm()"/>
               <q-btn type="button" color="red" label="Cancelar" class="cancel-btn"  @click="confirm = true" />
             </div>
             <q-dialog v-model="confirm" persistent>
@@ -82,6 +82,7 @@
 
 <script>
 import { ref } from 'vue'
+import axios from 'axios'
 export default {
   setup () {
     return {
@@ -94,7 +95,6 @@ export default {
       formData: {
         nombre: '',
         apellidos: '',
-        dni: '',
         email: '',
         password: '',
         newPassword: ''
@@ -110,24 +110,39 @@ export default {
       this.$router.push(route);
     },
     submitForm() {
-      // Validar el formulario antes de enviar
-      this.$refs.form.validate().then(success => {
-        if (success) {
-          // Lógica para enviar el formulario de registro si la validación pasa
-          console.log('Formulario enviado', this.formData);
-          // Aquí puedes agregar la lógica para enviar los datos a tu backend
-          // Por ejemplo, enviar una solicitud HTTP POST al servidor
-          // axios.post('/api/registro', this.formData)
-          //   .then(response => {
-          //     console.log('Registro exitoso', response.data);
-          //     // Redirigir a la página de inicio de sesión u otra página
-          //   })
-          //   .catch(error => {
-          //     console.error('Error en el registro', error);
-          //     // Manejar errores de validación u otros errores
-          //   });
-        }
-      });
+      let URL = "http://localhost:5259/api/Usuario/Create"
+      let user = {
+        nombre: this.formData.nombre,
+        apellidos: this.formData.apellidos,
+        correoElectronico: this.formData.email,
+        idRol: 2,
+        contrasena: this.formData.password
+      }
+      // console.log("El usuario es"+JSON.stringify(user));
+      axios.post(URL, user,{
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+        .then(response => {
+          console.log("La respuesta de signup es: " + JSON.stringify(response))
+
+          this.$q.notify({
+            message: "Registro exitoso",
+            color: "positive",
+            position: "bottom",
+            timeout: 5000
+          })
+          this.$router.push("/")
+        }).catch(error => {
+          console.log("El error es: " + JSON.stringify(error))
+          this.$q.notify({
+            message: "Ocurrió un error...",
+            color: "negative",
+            position: "top",
+            timeout: 5000
+          })
+        })
     },
     requiredRule(field) {
       return [val => !!val || `El ${field} es requerido`];
