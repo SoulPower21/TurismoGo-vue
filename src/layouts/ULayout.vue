@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!-- <template>
   <div class="q-pa">
     <q-layout view="lHh Lpr lff" container style="height: 100vh" class="shadow-2 rounded-borders">
@@ -97,6 +98,8 @@ export default {
 </script> -->
 
 
+=======
+>>>>>>> cdd880f86b12f97b0923c53740f7a56feb35a725
 <template>
   <div class="q-pa">
     <q-layout view="lHh Lpr lff" container style="height: 100vh" class="shadow-2 rounded-borders">
@@ -135,7 +138,11 @@ export default {
               </q-item-section>
             </q-item>
 
+<<<<<<< HEAD
             <q-item clickable v-ripple @click="navigateTo('review')">
+=======
+            <q-item clickable v-ripple @click="navigateTo('reseña')">
+>>>>>>> cdd880f86b12f97b0923c53740f7a56feb35a725
               <q-item-section avatar>
                 <q-icon name="rate_review" />
               </q-item-section>

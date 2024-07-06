@@ -33,7 +33,11 @@
             dense
             icon="person"
             label="Registros e informes"
+<<<<<<< HEAD
             @click="navigateTo('/informes')"
+=======
+            @click="navigateTo('/registrosl')"
+>>>>>>> cdd880f86b12f97b0923c53740f7a56feb35a725
             class="nav-btn"
             color="white"
           />
