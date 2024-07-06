@@ -1,6 +1,5 @@
 <template>
   <div class="pagina-informes">
-    <!-- Cabecera -->
     <header class="header">
       <div class="header-content">
         <q-icon name="menu" class="menu-icon" @click="toggleMenu" />
@@ -13,12 +12,11 @@
           <router-link to="/informes">
             <q-icon name="description" /> Informes
           </router-link>
-          <!-- Añade más enlaces según necesites -->
+
         </nav>
       </div>
     </header>
 
-    <!-- Contenido Principal -->
     <div class="main-content">
       <div class="back-button">
         <q-btn @click="goBack" icon="arrow_back">Volver</q-btn>
@@ -26,20 +24,17 @@
 
       <h2>Generar Informes y Estadísticas del Negocio</h2>
 
-      <!-- Componente para Informe de Empresa -->
       <div class="informes-section">
         <h3>Informe de Empresa</h3>
         <InformeEmpresa />
       </div>
 
-      <!-- Componente para Estadísticas Empresariales -->
       <div class="estadisticas-section">
         <h3>Estadísticas Empresariales</h3>
         <StadisticsE />
       </div>
     </div>
 
-    <!-- Pie de Página -->
     <footer class="footer">
       <p>&copy; {{ new Date().getFullYear() }} Nombre de Tu Aplicación. Todos los derechos reservados.</p>
     </footer>
@@ -47,8 +42,8 @@
 </template>
 
 <script>
-import InformeEmpresa from 'components/inform/InformeEmpresa.vue'; // Ajusta según la ubicación real
-import StadisticsE from 'components/inform/stadisticsE.vue'; // Ajusta según la ubicación real
+import InformeEmpresa from 'components/inform/InformeEmpresa.vue';
+import StadisticsE from 'components/inform/stadisticsE.vue';
 
 export default {
   components: {
@@ -57,29 +52,25 @@ export default {
   },
   methods: {
     toggleMenu() {
-      // Implementa lógica para abrir/cerrar menú si es necesario
     },
     goBack() {
-      // Implementa lógica para volver al menú anterior
-      this.$router.go(-1); // Esto vuelve atrás en el historial del router
+      this.$router.go(-1);
     }
   }
 };
 </script>
 
 <style scoped>
-/* Estilos para toda la página */
 .pagina-informes {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
-/* Estilos para la cabecera */
 .header {
-  background-color: #0288d1; /* Color de fondo azul */
+  background-color: #0288d1;
   color: white;
-  padding: 10px 20px; /* Aumentamos el espacio vertical y horizontal */
+  padding: 10px 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -115,23 +106,22 @@ export default {
   flex: 1;
 }
 
-/* Estilos para el contenido principal */
 .main-content {
   flex: 1;
   max-width: 800px;
   margin: auto;
   padding: 20px;
-  background-color: #e0f2f1; /* Color de fondo celeste */
-  background-image: url('/statics/fondo-celeste.jpg'); /* Ruta a la imagen de fondo */
+  background-color: #e0f2f1;
+  background-image: url('/statics/fondo-celeste.jpg');
   background-size: cover;
   background-position: center;
-  color: #333; /* Color de texto principal */
+  color: #333;
   font-family: Arial, sans-serif;
 }
 
 .main-content h2 {
   text-align: center;
-  color: #0288d1; /* Color de título */
+  color: #0288d1;
 }
 
 .informes-section,
@@ -148,9 +138,8 @@ export default {
   margin-bottom: 20px;
 }
 
-/* Estilos para el pie de página */
 .footer {
-  background-color: #0288d1; /* Color de fondo azul */
+  background-color: #0288d1;
   color: white;
   text-align: center;
   padding: 10px;
