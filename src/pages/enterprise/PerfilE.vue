@@ -71,30 +71,41 @@
 </template>
 
 <script>
-import { ref } from 'vue'
-
 export default {
-  setup () {
-    const empresa = ref({
-      nombre: 'Acme Corp',
-      ruc: '123456789',
-      direccion: 'Av. Principal 123',
-      telefono: '555-1234',
-      correo: 'contacto@acme.com',
-      contrasena: '********'
-    })
-
-    const editEmpresa = () => {
-      // Implementar lógica de edición de empresa aquí
-      console.log('Editar empresa')
-    }
-
+  data() {
     return {
-      empresa,
-      editEmpresa
+      empresa: {
+        nombre:'',
+        ruc:'',
+        direccion:'',
+        telefono:'',
+        correo:'',
+        contrasena:'',
+      }
+    };
+  },
+  created() {
+    this.loadUserData();
+  },
+  methods:{
+   loadUserData() {
+      const u = JSON.parse(localStorage.getItem('userData'));
+      if (u) {
+        this.empresa.nombre = u.nombreEmpresa;
+        this.empresa.ruc = "1231231231";
+        this.empresa.direccion = u.direccion;
+        this.empresa.telefono = u.telefono;
+        this.empresa.correo=u.correoElectronico;
+        this.empresa.contrasena ="******";
+
+        console.log("Nombre: ",u);
+      } else {
+        console.error('No se encontraron datos de usuario en localStorage');
+      }
     }
   }
-}
+  }
+
 </script>
 
 <style>
